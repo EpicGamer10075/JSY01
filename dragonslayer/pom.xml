@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.unocapstone.dragonslair</groupId>
+    <artifactId>dragonslayer</artifactId>
+    <version>4.1.0-SNAPSHOT</version>
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Java & tool versions -->
+    <maven.compiler.release>21</maven.compiler.release>
+    <javafx.version>21.0.8</javafx.version>
+    <derby.version>10.15.2.0</derby.version>
+    <junit.version>5.10.3</junit.version>
+    <cucumber.version>7.14.0</cucumber.version>
+    <surefire.version>3.5.2</surefire.version>
+    <jlink.plugin.version>3.1.0</jlink.plugin.version>
+    <jpackage.plugin.version>1.7.1</jpackage.plugin.version>
+
+    <!-- Change this according to OS: win, linux, mac --> 
+    <javafx.platform>win</javafx.platform>  
+
+    <!-- Used for Jpackage -->
+    <app.main.module>org.unocapstone.dragonslair</app.main.module>
+    <app.main.class>org.unocapstone.dragonslair.Launcher</app.main.class>
+    <app.name>DragonSlayer</app.name>
+    <app.vendor>UNO Capstone</app.vendor>
+
+    <!-- Make Headless (non-gui) testing the default -->
+    <!-- (Personal notes) 
+    -Dtestfx.headless=true tells TestFX to use headless mode 
+    -Dprism.order=sw forces JavaFX to use software rendering, avoiding GPU usage
+    -Dprism.text=t2k uses a text rendering engine that works the display 
+    -->
+    <test.argLine>-Dtestfx.headless=true -Dprism.order=sw -Dprism.text=t2k</test.argLine>
+</properties>
+
+<!-- Ensures all JUnit 5 files are compatible -->
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>${junit.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>    
+    </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <!-- JavaFX (platform-classified) -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-base</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>${javafx.platform}</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>${javafx.platform}</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${javafx.version}</version>
+      <classifier>${javafx.platform}</classifier>
+    </dependency>
+
+
+    <!-- DerbyDB -->
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>${derby.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.zeroturnaround</groupId>
+      <artifactId>zt-zip</artifactId>
+      <version>1.16</version>
+    </dependency>
+
+    <!-- JUnit 5 -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.platform</groupId>
+        <artifactId>junit-platform-launcher</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- Cucumber for JUnit 5 -->
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-java</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit-platform-engine</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- TestFX for Junit 5 -->
+    <!-- https://mvnrepository.com/artifact/org.testfx/testfx-junit5 -->
+    <dependency>
+        <groupId>org.testfx</groupId>
+        <artifactId>testfx-junit5</artifactId>
+        <version>4.0.18</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- TestFX Monocle for headless testing -->
+    <dependency>
+        <groupId>org.testfx</groupId>
+        <artifactId>openjfx-monocle</artifactId>
+        <version>17.0.10</version>
+        <scope>test</scope>
+    </dependency>
+
+   <!-- Old JUnit -->
+    <!-- <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency> -->
+
+    <!-- Cucumber -->
+    <!-- <dependency>
+        <groupId>io.cucumber</groupId>
+        <artifactId>cucumber-junit</artifactId>
+        <version>${cucumber.version}</version>
+        <scope>test</scope>
+    </dependency> -->
+</dependencies>
+    
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+                <release>${maven.compiler.release}</release>
+            </configuration>
+    </plugin>
+
+    <!-- Allows for dev command mvn clean javafx:run -->
+    <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <configuration>
+            <mainClass>org.unocapstone.dragonslair.Launcher</mainClass>
+        </configuration>
+    </plugin>
+
+    <!-- Surefire plugin for tests -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.version}</version>
+        <configuration>
+            <useModulePath>false</useModulePath>
+            <argLine>${test.argLine}</argLine>
+        </configuration>
+    </plugin>
+
+    <!-- JLink mvn plugin to create app JAR with common modules -->
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+            <execution>
+            <id>make-runtime</id>
+            <phase>package</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+                <executable>jlink</executable>
+                <arguments>
+                <!-- use ONLY the JDK's jmods as the module-path -->
+                <argument>--module-path</argument>
+                <argument>${java.home}/jmods</argument>
+
+                <!-- include just the JDK modules you actually need -->
+                <argument>--add-modules</argument>
+                <argument>java.se,jdk.unsupported,jdk.xml.dom</argument>
+
+                <!-- size trims -->
+                <argument>--strip-debug</argument>
+                <argument>--no-header-files</argument>
+                <argument>--no-man-pages</argument>
+                <argument>--compress</argument>
+                <argument>2</argument>
+
+                <!-- output dir for the custom runtime -->
+                <argument>--output</argument>
+                <argument>${project.build.directory}/mini-jre</argument>
+                </arguments>
+            </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+
+    <!-- Copes Dragon Slayer JAR into jpkg-mods, for linking -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+            <outputDirectory>${project.build.directory}/jpkg-mods</outputDirectory>
+        </configuration>
+    </plugin>
+
+    <!-- Copies runtime dependencies, such as JavaFX, to jpkg-mods -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+            <execution>
+            <id>copy-runtime-mods</id>
+            <phase>package</phase>
+            <goals><goal>copy-dependencies</goal></goals>
+            <configuration>
+                <includeScope>runtime</includeScope>
+                <outputDirectory>${project.build.directory}/jpkg-mods</outputDirectory>
+            </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+
+    <!-- Jpackage plugin for Maven -->
+    <!-- Uses prebuilt runtime with automatic modules -->
+    <plugin>
+        <groupId>org.panteleyev</groupId>
+        <artifactId>jpackage-maven-plugin</artifactId>
+        <version>${jpackage.plugin.version}</version>
+        <configuration>
+            <name>${app.name}</name>
+            <appVersion>${app.version.pkg}</appVersion>
+            <vendor>${app.vendor}</vendor>
+
+            <!-- Modular build -->
+            <module>${app.main.module}/${app.main.class}</module>
+
+            <!-- Finds the jpkg-folder to build with dependencies -->
+            <modulePaths><path>${project.build.directory}/jpkg-mods</path></modulePaths>
+
+            <runtimeImage>${project.build.directory}/mini-jre</runtimeImage>
+            
+            <destination>${project.build.directory}/distributable</destination>
+            <type>${jpackage.type}</type>
+
+            <!-- Debug -->
+            <winConsole>true</winConsole>
+
+            <!-- Windows related features 
+            !! Does not work with APP_IMAGE, only with MSI !! -->
+            <!-- <winMenu>true</winMenu> -->
+            <!-- <winShortcut>true</winShortcut> -->
+            <winConsole>false</winConsole>
+            <!-- Optional: icon -->
+            <icon>${project.basedir}/src/main/resources/icon/DragonSlayer.ico</icon>
+        </configuration>
+        <executions>
+            <execution>
+            <id>jpackage</id>
+            <phase>package</phase>
+            <goals>
+                <goal>jpackage</goal>
+            </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+
+            <!-- <plugin>
+                Build an executable JAR
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                            <mainClass>org.unocapstone.dragonslair.Launcher</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <finalName>${project.build.finalName}</finalName>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.unocapstone.dragonslair.Launcher</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <jpackage.type>APP_IMAGE</jpackage.type>
+                <app.version.pkg>4.2.0</app.version.pkg>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <jpackage.type>MSI</jpackage.type>
+                <app.version.pkg>4.2.0</app.version.pkg>
+            </properties>
+        </profile>
+        <!-- GUI test profile - to show the test manually -->
+        <profile>
+            <id>gui-test</id>
+            <properties>
+                <test.argLine></test.argLine>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

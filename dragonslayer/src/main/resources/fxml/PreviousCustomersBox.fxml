@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.unocapstone.dragonslair.controllers.PreviousCustomersController">
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Title History">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <!-- Acts as a spacer -->
+            <Region HBox.hgrow="ALWAYS" />
+            <ToggleButton fx:id="showActiveButton" mnemonicParsing="false" onAction="#toggleActiveFilter" text="Show Active Customers" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search Title:" />
+            <TextField fx:id="titleSearchField" prefWidth="175.0" promptText="Type to search titles..." />
+            <Text layoutX="10.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Customer:" />
+            <TextField fx:id="customerSearchField" layoutX="40.0" layoutY="48.0" prefWidth="175.0" promptText="Type to search customers..." />
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearFilters" prefHeight="25.0" prefWidth="120.0" text="Clear Filters" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Title:" />
+            <ComboBox fx:id="titleComboBox" onAction="#applyFilters" prefWidth="175.0" promptText="Select a Title!" />
+            <Text layoutX="10.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Customer:" />
+            <ComboBox fx:id="customerTitleBox" layoutX="40.0" layoutY="48.0" onAction="#applyFilters" prefWidth="175.0" promptText="Select a Customer!" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <TableView fx:id="customerTitleTable" prefHeight="400.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="customerColumn" minWidth="150.0" prefWidth="150.0" text="Customer" />
+          <TableColumn fx:id="titleColumn" minWidth="200.0" prefWidth="200.0" text="Title" />
+            <TableColumn fx:id="dateAddedColumn" prefWidth="120.0" text="Date Added" />
+            <TableColumn fx:id="dateRemovedColumn" prefWidth="120.0" text="Date Removed" />
+            <TableColumn fx:id="statusColumn" minWidth="-1.0" text="Status" />
+        </columns>
+      </TableView>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+         <children>
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="statusLabel" text="Ready" />
+            <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="recordCountStatusLabel" layoutX="10.0" layoutY="39.0" text="0 Records" />
+         </children>
+         <padding>
+            <Insets top="-5.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
