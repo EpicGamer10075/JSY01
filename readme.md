@@ -44,22 +44,23 @@ The list of tasks:
 <p>The Work Breakdown Structure (WBS):
   <table>
     <tr>
-      <td>Milestone 1</td>
-      <td>Milestone 2</td>
-      <td>Milestone 3</td>
-      <td>Milestone 4</td>
+      <td><strong>Milestone 1</strong></td>
+      <td><strong>Milestone 2</strong></td>
+      <td><strong>Milestone 3</strong></td>
+      <td><strong>Milestone 4</strong></td>
     </tr><tr>
-      <td>Add Request</td>
-      <td>Add Tag Request</td>
-      <td>Main Search Bar</td>
-      <td>Flag Toggle </td>
+      <td>Add Request (S)</td>
+      <td>Add Tag Request (M)</td>
+      <td>Main Search Bar (W)</td>
+      <td>Flag Toggle (M)</td>
     </tr><tr>
-      <td>Undo Button</td>
-      <td>Edit Mode Improve</td>
-      <td>Customer History</td>
-      <td>Customer Fields</td>
+      <td>Undo Button (C)</td>
+      <td>Edit Mode Improve (C)</td>
+      <td>Customer History (C)</td>
+      <td>Customer Fields (C)</td>
     </tr>
   </table>
+  <em>Priorities are included in parentheses. M is Must, S is Should, C is Could, W is Wish.</em>
 </p>
 
 <p>
