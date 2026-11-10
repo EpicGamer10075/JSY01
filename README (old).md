@@ -7,8 +7,13 @@ Capstone Project for UNO class CSCI4970.
 
 ## How to use:
 Ensure that Maven is installed within your environmental variables.
+- Download from: https://maven.apache.org/download.cgi
+- Search "Environment Variables" in Windows Home menu, and open assosciated app
+- Locate "Path" Variable on top half of window, then select "Edit"
+- Select "New" and paste in the path to the ".../apache-maven-X.X.X/bin"
+- Select OK to close both windows
 
-Run the command: `mvn clean package -DskipTests -Pdev`
+Run the command: `mvn clean package -DskipTests -Pdev` within the ".../DragonSlayerV5-main/dragonslayer" folder that contains the pom.xml file
 - This will create a standalone `.exe` for testing.
 - It can be found within `{installationDirectory}\dragonslayer\target\distributable\Dragonslayer`
 
