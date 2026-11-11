@@ -17,6 +17,8 @@ Run the command: `mvn clean package -DskipTests -Pdev` within the ".../DragonSla
 - This will create a standalone `.exe` for testing.
 - It can be found within `{installationDirectory}\dragonslayer\target\distributable\Dragonslayer`
 
+To enable edit mode, use password 'admin'
+
 ## Changelog:
 #### Version 4.0.0
 ###### Major Updates
