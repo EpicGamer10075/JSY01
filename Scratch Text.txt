@@ -1,0 +1,11 @@
+We'll keep random info about things that we're working on in here.
+
+Evan:
+  The Add Tag Request button is something mentioned about in the old Release notes:
+    - TagOrders! You can now create special orders for customers which will include certain tags, which will dynamically update if titles are given said tags.
+        Since they are auto-generated, they show up as Green to differentiate them from normal orders.
+    - TagOrders can only be Added and Deleted from the customers menu. They cannot be edited, and if they are, this is untested.
+  The sponsor wanted us to investigate what this does, and these notes at least tell us what it was *trying* to do.
+  I tested them a little, and have found that I can add a Tag Request to a Customer's list of Requests, and it shows up there,
+    but it only shows up with text describing the Tag itself and not any Titles that populate it.
+  It seems this feature wasn't fully implemented by the people who worked on this project before us, so we'll need to do something about it.
