@@ -10,25 +10,25 @@
 The Customer field should also automatically suggest matching customer names as the user types. The match should work as long as the customer's name contains the typed string. Essentially, we should take the existing search/autocomplete functionality used for Title selection and add similar functionality to Customer selection.
 I think we can handle the Add Request behavior by tracking which tab is currently selected and passing that information into the function that opens the pane:
 - If the Customer tab is selected → focus/highlight Title.
-- If the Title tab is selected → focus/highlight Customer.
+- If the Title tab is selected → focus/highlight Customer.  
 
-2. Undo button (COULD)
-The project sponsor wants an Undo button located near the Edit/View mode buttons.
+2. Undo button (COULD)  
+The project sponsor wants an Undo button located near the Edit/View mode buttons.  
 He only requested the ability to undo the most recent action, so we should not need to build a full undo history. We will likely just need to temporarily store the last action and provide a way to reverse it.
 
-3. Add Tag Request button (MUST)
-The project sponsor wants us to investigate what the existing “Add Tag Request” button actually does.
+3. Add Tag Request button (MUST)  
+The project sponsor wants us to investigate what the existing “Add Tag Request” button actually does.  
 
-4. Edit Mode login improvements (COULD)
-When logging into Edit Mode:
-- The application should notify the user if Caps Lock is enabled.
-- If the login fails, a popup should explain why. In most cases, this will probably just say something along the lines of “Password was incorrect.”
+4. Edit Mode login improvements (COULD)  
+When logging into Edit Mode:  
+- The application should notify the user if Caps Lock is enabled.  
+- If the login fails, a popup should explain why. In most cases, this will probably just say something along the lines of “Password was incorrect.”  
 
-5. Main search bar (WISH)
-The project sponsor wants a double-click inside the main search bar to clear the current search/results.
+5. Main search bar (WISH)  
+The project sponsor wants a double-click inside the main search bar to clear the current search/results.  
 
-6. Historical customer and title data (COULD)
-The project sponsor wants the application to begin preserving historical request data.
+6. Historical customer and title data (COULD)  
+The project sponsor wants the application to begin preserving historical request data.  
 For each customer, we should retain:
 - Previous title requests.
 - The date of each request.
@@ -36,10 +36,10 @@ For each title, we should retain:
 - Previous customers who requested it.
 - The date of those requests.
 - The number of times the title has been requested over time.
-This will probably require some database changes, so we should discuss the best way to structure the historical data before implementing it.
+This will probably require some database changes, so we should discuss the best way to structure the historical data before implementing it.  
 
-7. Flag toggle in View Mode (MUST)
-The Flag toggle should be disabled while the application is in View Mode.
+7. Flag toggle in View Mode (MUST)  
+The Flag toggle should be disabled while the application is in View Mode.  
 Ideally:
 - It should not be clickable.
 - It should also appear grayed out or otherwise visually disabled.
