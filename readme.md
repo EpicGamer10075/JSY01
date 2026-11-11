@@ -40,6 +40,7 @@ The list of tasks:
     </ul>
   </ul>
 </ul>
+More details about the tasks can be found in the Features.md file.
 
 <p>The Work Breakdown Structure (WBS):
   <table>
