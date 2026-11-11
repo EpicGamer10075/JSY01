@@ -1,4 +1,4 @@
-1. Add Request behavior
+1. Add Request behavior (SHOULD)
 - From the Customer View:
   - When “Add Request” is clicked, the request pane should open.
   - The cursor should automatically move to the Title field.
@@ -12,22 +12,22 @@ I think we can handle the Add Request behavior by tracking which tab is currentl
 - If the Customer tab is selected → focus/highlight Title.
 - If the Title tab is selected → focus/highlight Customer.
 
-2. Undo button
+2. Undo button (COULD)
 The project sponsor wants an Undo button located near the Edit/View mode buttons.
 He only requested the ability to undo the most recent action, so we should not need to build a full undo history. We will likely just need to temporarily store the last action and provide a way to reverse it.
 
-3. Add Tag Request button
+3. Add Tag Request button (MUST)
 The project sponsor wants us to investigate what the existing “Add Tag Request” button actually does.
 
-4. Edit Mode login improvements
+4. Edit Mode login improvements (COULD)
 When logging into Edit Mode:
 - The application should notify the user if Caps Lock is enabled.
 - If the login fails, a popup should explain why. In most cases, this will probably just say something along the lines of “Password was incorrect.”
 
-5. Main search bar
+5. Main search bar (WISH)
 The project sponsor wants a double-click inside the main search bar to clear the current search/results.
 
-6. Historical customer and title data
+6. Historical customer and title data (COULD)
 The project sponsor wants the application to begin preserving historical request data.
 For each customer, we should retain:
 - Previous title requests.
@@ -37,12 +37,14 @@ For each title, we should retain:
 - The date of those requests.
 - The number of times the title has been requested over time.
 This will probably require some database changes, so we should discuss the best way to structure the historical data before implementing it.
-7. Flag toggle in View Mode
+
+7. Flag toggle in View Mode (MUST)
 The Flag toggle should be disabled while the application is in View Mode.
 Ideally:
 - It should not be clickable.
 - It should also appear grayed out or otherwise visually disabled.
-8. New Customer fields
+
+8. New Customer fields (COULD)
 Two new fields need to be added to the Customer data:
 - Creation Date — automatically populated whenever a new customer is created.
 - Last Flagged Date — stores the most recent date that customer was flagged.
