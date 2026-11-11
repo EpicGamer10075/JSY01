@@ -8,4 +8,7 @@ Evan:
   The sponsor wanted us to investigate what this does, and these notes at least tell us what it was *trying* to do.
   I tested them a little, and have found that I can add a Tag Request to a Customer's list of Requests, and it shows up there,
     but it only shows up with text describing the Tag itself and not any Titles that populate it.
-  It seems this feature wasn't fully implemented by the people who worked on this project before us, so we'll need to do something about it.
+  It seems this feature wasn't fully implemented by the people who worked on this project before us, though...
+    I'm not exactly certain about what it would look like even if it worked correctly. We can detail what it does...
+    and mention it to the sponsor, and maybe ask if he wants that fully implemented. If he doesn't, we can just get rid of it,
+    but if not, then we'll need to figure out a way for it to work. For Milestone 2, let's just show it off in the video.
