@@ -6,6 +6,7 @@ module org.unocapstone.dragonslair {
     // --- JDBC (Derby discovered via META-INF/services) ---
     requires java.sql;
     requires java.xml; // for DataSource via JNDI lookup
+    requires java.desktop;
     requires zt.zip;
 
     requires org.apache.commons.io;
