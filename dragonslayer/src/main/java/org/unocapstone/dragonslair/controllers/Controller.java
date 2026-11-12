@@ -50,6 +50,7 @@ import org.unocapstone.dragonslair.RequestTable;
 import org.unocapstone.dragonslair.Settings;
 import org.unocapstone.dragonslair.TagOrder;
 import org.unocapstone.dragonslair.Title;
+import org.unocapstone.dragonslair.controllers.Controller.CURRENT_PAGE;
 import org.unocapstone.dragonslair.ui.AlertBox;
 import org.unocapstone.dragonslair.ui.ConfirmBox;
 import org.zeroturnaround.zip.ZipUtil;
@@ -2909,6 +2910,7 @@ public class Controller implements Initializable {
                 Parent root = fxmlLoader.load();
 
                 NewOrderController newOrderController = fxmlLoader.getController();
+                newOrderController.selectText(true);
                 newOrderController.setConnection(conn);
                 newOrderController.populate(this.getTitles());
                 newOrderController.populateCustomers(this.getCustomers());
@@ -3019,6 +3021,7 @@ public class Controller implements Initializable {
                 Parent root = fxmlLoader.load();
 
                 NewOrderController newOrderController = fxmlLoader.getController();
+                newOrderController.selectText(false);
                 newOrderController.setConnection(conn);
                 newOrderController.populate(this.getTitles());
                 newOrderController.populateCustomers(this.getCustomers());
