@@ -10,6 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import javafx.scene.paint.Color;
 
 /**
  * ConfirmBox to display a window and get a yes or no answer from the user.
@@ -18,6 +21,8 @@ import javafx.stage.Stage;
 public class ConfirmBox {
 
     static boolean answer;
+    static Toolkit kit = Toolkit.getDefaultToolkit();
+    static boolean caps_on = kit.getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
 
     /**
      * Displays the title as the window title, and the message as text inside
@@ -72,7 +77,7 @@ public class ConfirmBox {
      * @param title The title for the window
      * @param message The message to display in the window
      * @param requiredPassword The password that must be entered to confirm
-     * @return True if the user entered the correct password, false otherwise
+     * @return true if the user entered the correct password, false otherwise
      */
     public static boolean displayWithPassword(String title, String message, String requiredPassword) {
         Stage window = new Stage();
@@ -82,6 +87,14 @@ public class ConfirmBox {
         
         Label label = new Label();
         label.setText(message);
+
+        Label capsWarning = new Label();
+        capsWarning.setText("CAPS Lock is on!");
+
+        Label error = new Label();
+        error.setText("Password is incorrect");
+        error.setTextFill(Color.RED);
+        error.setVisible(false);
         
         Label passwordLabel = new Label("Enter Password:");
         PasswordField passwordField = new PasswordField();
@@ -91,10 +104,11 @@ public class ConfirmBox {
             if( event.getCode() == KeyCode.ENTER ) {
                 if (passwordField.getText().equals(requiredPassword)) {
                     answer = true;
+                    window.close();
                 } else {
                     answer = false;
+                    error.setVisible(true);
                 }
-                window.close();
             }
         } );
         Button yesButton = new Button("Confirm");
@@ -104,14 +118,16 @@ public class ConfirmBox {
         noButton.setId("noButton");
         
         answer = false; // Default to false
+        caps_on = kit.getLockingKeyState(KeyEvent.VK_CAPS_LOCK); //set caps_on on window init
         
         yesButton.setOnAction(e -> {
             if (passwordField.getText().equals(requiredPassword)) {
                 answer = true;
+                window.close();
             } else {
                 answer = false;
+                error.setVisible(true);
             }
-            window.close();
         });
         
         noButton.setOnAction(e -> {
@@ -125,17 +141,29 @@ public class ConfirmBox {
         
         VBox passwordBox = new VBox(5);
         passwordBox.getChildren().addAll(passwordLabel, passwordField);
-        
+
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, passwordBox, buttonsBox);
+        layout.getChildren().addAll(label, passwordBox, error, buttonsBox);
         layout.setAlignment(Pos.CENTER);
         
         Scene scene = new Scene(layout);
         window.setScene(scene);
+        scene.setOnKeyReleased( event -> {
+            if ( event.getCode() == KeyCode.CAPS ) {
+                //caps_on = !caps_on; //invert caps_on (this needs to be done manually, as the code doesn't register this value changing after it the window init's)
+                //System.out.println("Capslock pressed");
+                if(kit.getLockingKeyState(KeyEvent.VK_CAPS_LOCK))
+                    capsWarning.setText("CAPS ON");
+                else
+                    capsWarning.setText("CAPS OFF");
+                //capsWarning.setVisible(Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK));
+            }
+        });
         window.showAndWait();
         
         return answer;
     }
+    
 
 }
 
