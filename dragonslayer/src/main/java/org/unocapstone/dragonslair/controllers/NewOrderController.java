@@ -67,7 +67,7 @@ public class NewOrderController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         setTitle.focusedProperty().addListener((obs, oldval, newval) -> {
             System.out.println("Selecting all New Order Title Text");
-            // setTitle.getEditor().selectAll();
+            //setTitle.getEditor().selectAll();
 
             Platform.runLater(() -> {
                 if ((setTitle.getEditor().isFocused() || setTitle.isFocused()) && !setTitle.getEditor().getText().isEmpty()) {
@@ -75,7 +75,19 @@ public class NewOrderController implements Initializable{
                 }
             });
         });
+        setName.focusedProperty().addListener((obs, oldval, newval) -> {
+            System.out.println("Selecting all New Order Customer Text");
+            //setName.getEditor().selectAll();
+
+            Platform.runLater(() -> {
+                if ((setName.getEditor().isFocused() || setName.isFocused()) && !setName.getEditor().getText().isEmpty()) {
+                    setName.getEditor().selectAll();
+                }
+            });
+        });
     }
+
+   
 
     /**
      * Creates an order based on the fields and ComboBox and adds it
@@ -172,6 +184,19 @@ public class NewOrderController implements Initializable{
         window.close();
     }
 
+     /**
+     * Creates an order based on the fields and ComboBox and adds it
+     * to the database
+     * @param tab Tab that triggered this method (customer = true, title = false)
+     */
+    public void selectText(boolean tab) {
+        if(tab) {
+            Platform.runLater(() -> { setTitle.requestFocus(); });
+        } else {
+            Platform.runLater(() -> { setName.requestFocus(); });
+        }
+    }
+    
     /**
      * Populate the ComboBox with the titles in titlesStr, add listener to handle typing over selection
      */
