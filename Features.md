@@ -31,7 +31,7 @@ The project sponsor wants a double-click inside the main search bar to clear the
 The project sponsor wants the application to begin preserving historical request data.  
 For each customer, we should retain:
 - Previous title requests.
-- The date of each request.
+- The date of each request.  
 For each title, we should retain:
 - Previous customers who requested it.
 - The date of those requests.
